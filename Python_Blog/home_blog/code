@@ -1,0 +1,17 @@
+class Blog_Post(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
+    coder = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+
+context = {
+        'posts': Blog_Post.objects.all()
+    }
+    return render(request, 'home_blog.html', context)
+
+{% load crispy_forms_tags %}
+
+
+<img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
