@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+  <div class="container my-5">
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">Auto Player</h4>
+          </div>
+          <div class="card-body">
+            <img class="d-block mx-auto mb-4" src="{% static 'img/RPS.gif' %}" alt="error" width="250" height="250">
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Some Text</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"></h1>
+              {% if user.is_authenticated %}
+            <h1 class="card-title pricing-card-title"><small class="text-muted fw-light">Select Option</small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li><button type="button" class="w-100 btn btn-lg btn-primary">Rock</button></li><br>
+              <li><button type="button" class="w-100 btn btn-lg btn-primary">Paper</button></li><br>
+              <li><button type="button" class="w-100 btn btn-lg btn-primary">Scissors</button></li><br>
+              <li></li>
+            </ul>
+              {% else %}
+              <button type="button" class="w-100 btn btn-lg btn-primary" >Start Game</button>
+              {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm border-primary">
+          <div class="card-header py-3 text-white bg-primary border-primary">
+            <h4 class="my-0 fw-normal">Player</h4>
+          </div>
+          <div class="card-body">
+            <img class="d-block mx-auto mb-4" src="{% static 'img/RPS.gif' %}" alt="error" width="250" height="250">
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Some Text</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <article class="media content-section">
+          <div class="media-body">
+              {% if user.is_authenticated %}
+            <div class="article-metadata">
+              <h4 class="article-title">Welcome {{ user.username }}</h4>
+            </div>
+              {% endif %}
+            <h2><a class="article-title">Score Board</a></h2>
+            <table class="table table-striped table-sm">
+                <tr>
+                    <th>Player</th>
+                    <th>No Of Games Played</th>
+                    <th>Score</th>
+                </tr>
+                {% for data in score %}
+                <tr>
+                    <td>{{ data.player }}</td>
+                    <td>{{ data.no_game_payed }}</td>
+                    <td>{{ data.score}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+          </div>
+    </article>
+{% endblock content %}

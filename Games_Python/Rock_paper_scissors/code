@@ -1,0 +1,27 @@
+ <img class="rounded-circle article-img" src="#">
+
+
+path('profile', views.profile, name='profile'),
+ def profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}!')
+            return redirect('profile.html')
+    else:
+        form = ProfileForm()
+    return render(request, 'profile.html', {'form': form})
+
+
+class ProfileView(SuccessMessageMixin, CreateView):
+    model = User
+    template_name = 'profile.html'
+    # success_url = reverse_lazy('login')
+    form_class = ProfileForm
+    context_object_name = 'User'
+    success_message = "Your profile was updated successfully"
+
+
+    {{%  'media/RPS.gif' %}}
